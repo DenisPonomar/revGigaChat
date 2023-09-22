@@ -1,8 +1,13 @@
 from setuptools import setup
+from pathlib import Path
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text(encoding="utf-8")
 
 setup(
     name='revGigaChat',
-    version='1.1',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    version='1.3',
     author='Denis Ponomar',
     packages=['revGigaChat'],
     install_requires=[
