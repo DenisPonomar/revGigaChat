@@ -7,6 +7,10 @@
 ```
 pip install -U git+https://github.com/DenisPonomar/revGigaChat.git
 ```
+или
+```
+pip install revGigaChat
+```
 # Использование
 ## Через developers.sber.ru/studio/workspaces
 ### Подготовка
@@ -56,3 +60,4 @@ print(loop.run_until_complete(Chat.send_telegram_message(message = "Привет
 * Нет необходимости иметь российский IP
 ### Минусы
 * Работа только с одним чатом
+* Риск постоянного бана
