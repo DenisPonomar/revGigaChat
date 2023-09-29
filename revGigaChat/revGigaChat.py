@@ -38,11 +38,11 @@ class V1:
 				'TE': 'trailers'
 					 },
 		)
-        if response.status_code == 401 or response.status_code == 403:
-            warnings.warn(eval(response.text)["message"])
+        if response.status_code != 200:
+            warnings.warn(str(json.loads(response.text)["message"]))
             return ""
         if response.status_code == 200:
-            request_id = eval(response.text)["request_id"]
+            request_id = json.loads(response.text)["request_id"]
             response = requests.get(
                             'https://developers.sber.ru/api/chatwm/api/client/get_result_events?request_id='+str(request_id)+'&space-id=' + self.space_id + '&user-id=' + self.user_id,
                             headers={
@@ -62,7 +62,7 @@ class V1:
                                              },
                     )
             q = response.content.decode('UTF-8').split("\n")
-            q = eval(q[len(q)-3].replace("data: ", ""))
+            q = json.loads(q[len(q)-3].replace("data: ", ""))
             q = q["responses"][0]['data']
             q = q.replace('<image src="', '<image src="https://developers.sber.ru/studio/generated-images/')
             return q

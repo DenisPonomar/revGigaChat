@@ -7,12 +7,13 @@ setup(
     name='revGigaChat',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    version='1.4',
+    version='2.0',
     author='Denis Ponomar',
     packages=['revGigaChat'],
     install_requires=[
         'requests',
-        'telethon'
+        'telethon',
+        'Pillow'
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
