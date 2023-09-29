@@ -1,6 +1,6 @@
 # revGigaChat
 # Описание
-Реверс-инжиниринг GigaChat от СберБанк России
+Реверс-инжиниринг GigaChat и Kandinsky от СберБанк России
 # Отказ от отственноости
 Используя этот репозиторий или любой связанный с ним код, вы соглашаетесь с [официальным уведомлением](https://github.com/DenisPonomar/revGigaChat/blob/main/LEGAL_NOTICE.md). Автор не несет ответственности за любые копии, форки, повторные загрузки, сделанные другими пользователями, или что-либо еще, связанное с revGigaChat. Это единственный аккаунт и репозиторий автора. Чтобы предотвратить выдачу себя за другое лицо или безответственные действия, соблюдайте лицензию GNU GPL, которую использует этот репозиторий. 
 # Установка
@@ -61,3 +61,45 @@ print(loop.run_until_complete(Chat.send_telegram_message(message = "Привет
 ### Минусы
 * Работа только с одним чатом
 * Риск постоянного бана
+## Через fusionbrain.ai/editor/
+```
+from revGigaChat import revKandinsky
+from PIL import Image
+from io import BytesIO
+image_bytes = revKandinsky.FB(prompt="девушка", negativ_prompt="красота", width=1024, height=1024, style=revKandinsky.get_style("Аниме"))
+#image_bytes = revKandinsky.FB(prompt="девушка", negativ_prompt="красота", width=1024, height=1024, style="ANIME")
+# Создаем объект BytesIO из потока байтов
+image_stream = BytesIO(image_bytes)
+# Открываем изображение с помощью PIL
+image = Image.open(image_stream)
+# Отображаем изображение
+image.show()
+```
+### Необязательные параметры
+* negativ_prompt
+* style
+### Список всех стилей
+* "Аниме": "ANIME",
+* "Детальное фото": "UHD",
+* "Киберпанк": "CYBERPUNK",
+* "Кандинский": "KANDINSKY",
+* "Айвазовский": "AIVAZOVSKY",
+* "Малевич": "MALEVICH",
+* "Пикассо": "PICASSO",
+* "Гончарова": "GONCHAROVA",
+* "Классицизм": "CLASSICIS",
+* "Ренессанс": "RENAISSANCE",
+* "Картина маслом": "OILPAINTING",
+* "Рисунок карандашом<": "PENCILDRAWING",
+* "Цифровая живопись": "DIGITALPAINTING",
+* "Средневековый стиль": "MEDIEVALPAINTING",
+* "Советский мультфильм": "SOVIETCARTOON",
+* "3D рендер": "RENDER",
+* "Мультфильм": "CARTOON",
+* "Студийное фото": "STUDIOPHOTO",
+* "Портретное фото": "PORTRAITPHOTO",
+* "Хохлома": "KHOKHLOMA",
+* "Новый год": "CRISTMAS"
+### Примечания
+* Размер изображения не больше 1024x1024 пикселей
+* 
