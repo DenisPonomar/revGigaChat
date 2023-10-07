@@ -29,6 +29,12 @@ from revGigaChat import revGigaChat
 Chat = revGigaChat.V1(cookie = "Cookie", space_id = "space-id", user_id = "user-id")
 print(Chat.GPT("Привет"))
 ```
+### Создание нового чата с использованием прокси
+```
+from revGigaChat import revGigaChat
+Chat = revGigaChat.V1(cookie = "Cookie", space_id = "space-id", user_id = "user-id", proxies="127.0.0.1:8080")
+print(Chat.GPT("Привет"))
+```
 ### Использование чата с заданным id
 id представляет из себя строку uuid
 ```
@@ -39,7 +45,7 @@ print(Chat.GPT("Привет"))
 ### Плюсы
 * Возможность параллельно работать с несколькими чатами
 ### Минусы
-* Необходимо иметь российский IP
+* Необходимо иметь российский IP или российский прокси
 * Каждые несколько дней нужно получать новый Cookie
 ## Через клиент Telegram
 * Перейдите по ссылке https://my.telegram.org/auth
