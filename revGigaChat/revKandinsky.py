@@ -74,7 +74,7 @@ def get_style(style):
                   "Классицизм": "CLASSICIS",
                   "Ренессанс": "RENAISSANCE",
                   "Картина маслом": "OILPAINTING",
-                  "Рисунок карандашом<": "PENCILDRAWING",
+                  "Рисунок карандашом": "PENCILDRAWING",
                   "Цифровая живопись": "DIGITALPAINTING",
                   "Средневековый стиль": "MEDIEVALPAINTING",
                   "Советский мультфильм": "SOVIETCARTOON",
