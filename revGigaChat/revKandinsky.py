@@ -5,13 +5,14 @@ import base64
 import warnings
 from PIL import Image
 from io import BytesIO
-def FB(prompt, width, height, negativ_prompt="", style=""):
+def FB(prompt, width, height, cookie, negativ_prompt="", style=""):
     # URL, заголовки и данные для запроса
     url = "https://api.fusionbrain.ai/web/api/v1/text2image/run?model_id=1"
     headers = {
                 'Accept': 'application/json, text/plain, */*',
                 'Accept-Encoding': 'gzip, deflate, br',
                 'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+                'Authorization': 'Bearer '+cookie,
                 'Cache-Control': 'no-cache',
                 'Connection': 'keep-alive',
                 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryrlQE4GkVXTOCFaq3',
@@ -41,6 +42,7 @@ def FB(prompt, width, height, negativ_prompt="", style=""):
                     'Accept': 'application/json, text/plain, */*',
                     'Accept-Encoding': 'gzip, deflate, br',
                     'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+                    'Authorization': 'Bearer '+cookie,
                     'Cache-Control': 'no-cache',
                     'Connection': 'keep-alive',
                     'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryrlQE4GkVXTOCFaq3',
