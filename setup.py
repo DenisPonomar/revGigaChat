@@ -7,7 +7,7 @@ setup(
     name='revGigaChat',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    version='2.1',
+    version='2.2',
     author='Denis Ponomar',
     packages=['revGigaChat'],
     install_requires=[

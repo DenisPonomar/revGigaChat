@@ -71,12 +71,21 @@ print(loop.run_until_complete(Chat.send_telegram_message(message = "Привет
 * Риск постоянного бана при нежелательных запросах
 ## Kandinsky
 ### Через fusionbrain.ai/editor/
+#### Подготовка
+* Перейдите по ссылке https://https://fusionbrain.ai/editor/
+* Авторизуйтесь
+* Откройте инструменты разработчика через F12
+* Перейдите во вкладку "Сеть" или "Network
+* Отправьте запрос (промпт)
+* Найдите запрос на https://api.fusionbrain.ai/web/api/v1/text2image/run?model_id=1
+* Из заголовка запроса Authorization скопируйте часть после Bearer (без пробела) - это будет cookie
+#### Использование
 ```
 from revGigaChat import revKandinsky
 from PIL import Image
 from io import BytesIO
-image_bytes = revKandinsky.FB(prompt="девушка", negativ_prompt="красота", width=1024, height=1024, style=revKandinsky.get_style("Аниме"))
-#image_bytes = revKandinsky.FB(prompt="девушка", negativ_prompt="красота", width=1024, height=1024, style="ANIME")
+image_bytes = revKandinsky.FB(prompt="девушка", negativ_prompt="красота", width=1024, height=1024, cookie=cookie, style=revKandinsky.get_style("Аниме"))
+#image_bytes = revKandinsky.FB(prompt="девушка", negativ_prompt="красота", width=1024, height=1024, cookie=cookie, style="ANIME")
 # Создаем объект BytesIO из потока байтов
 image_stream = BytesIO(image_bytes)
 # Открываем изображение с помощью PIL

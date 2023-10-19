@@ -24,24 +24,26 @@ class V1:
         self.user_id = user_id
     def GPT(self, message):
         headers_1={
-				'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0',
-				'Accept': 'application/json, text/plain, */*',
+				'Accept': 'text/event-stream',
+                'Accept-Encoding': 'gzip, deflate, br',
 				'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
-				'Accept-Encoding': 'gzip, deflate, br',
+                'Connection': 'keep-alive',
 				'Content-Type': 'application/json',
-				'user-id': self.user_id,
-				'space-id': self.space_id,
-				'X-KL-kfa-Ajax-Request': 'Ajax_Request',
-				'Origin': 'https://developers.sber.ru',
-				'DNT': '1',
-				'Connection': 'keep-alive',
-				'Cookie': self.cookie,
-				'Sec-Fetch-Dest': 'empty',
+                'Cookie': self.cookie,
+                'DNT': '1',
+                'Origin': 'https://developers.sber.ru',
+                'Pragma': 'no-cache',
+                'Sec-Fetch-Dest': 'empty',
 				'Sec-Fetch-Mode': 'cors',
 				'Sec-Fetch-Site': 'same-origin',
-				'TE': 'trailers'}
-        headers_2={
+				'TE': 'trailers',
+				'space-id': self.space_id,
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0',
+				'X-KL-kfa-Ajax-Request': 'Ajax_Request',
+                'user-id': self.user_id,
+				
+}
+        headers_2={
                 'Accept': 'text/event-stream',
                 'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
                 'Accept-Encoding': 'gzip, deflate, br',
@@ -53,11 +55,12 @@ class V1:
                 'Sec-Fetch-Site': 'same-origin',
                 'Pragma': 'no-cache',
                 'Cache-Control': 'no-cache',
-                'TE': 'trailers'}
+                'TE': 'trailers',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0',}
         if self.proxies == False:
             response = requests.post(
-                'https://developers.sber.ru/api/chatwm/api/client/request',
-                json={"generate_alternatives":"false","request_json":message,"session_id":self.id,"model_type":"GigaChat:v1.3.0","preset":"default"},
+                'https://developers.sber.ru/api/chatwm/api/client/request_with_result_events?user-id='+self.user_id+"&space-id="+self.space_id,
+                json={"mode":"request","request":{"request_json":message,"session_id":self.id,"model_type":"GigaChat:latest","preset":"default","generate_alternatives":"false","user_id":self.user_id}},
                 headers=headers_1,
             )
             if response.status_code != 200:
@@ -65,14 +68,14 @@ class V1:
                 return ""
 
             if response.status_code == 200:
-                request_id = json.loads(response.text)["request_id"]
+                request_id = json.loads(response.text.split('\n')[2][6:])["request_id"]
                 response = requests.get(
                     'https://developers.sber.ru/api/chatwm/api/client/get_result_events?request_id='+str(request_id)+'&space-id=' + self.space_id + '&user-id=' + self.user_id,
                     headers=headers_2)
         if self.proxies != False:
             response = requests.post(
-                'https://developers.sber.ru/api/chatwm/api/client/request',
-                json={"generate_alternatives":"false","request_json":message,"session_id":self.id,"model_type":"GigaChat:v1.3.0","preset":"default"},
+                'https://developers.sber.ru/api/chatwm/api/client/request_with_result_events?user-id='+self.user_id+"&space-id="+self.space_id,
+                json={"mode":"request","request":{"request_json":message,"session_id":self.id,"model_type":"GigaChat:latest","preset":"default","generate_alternatives":"false","user_id":self.user_id}},
                 headers=headers_1,
                 proxies=self.proxies
             )
@@ -81,7 +84,7 @@ class V1:
                 return ""
 
             if response.status_code == 200:
-                request_id = json.loads(response.text)["request_id"]
+                request_id = json.loads(response.text.split('\n')[2][6:])["request_id"]
                 response = requests.get(
                     'https://developers.sber.ru/api/chatwm/api/client/get_result_events?request_id='+str(request_id)+'&space-id=' + self.space_id + '&user-id=' + self.user_id,
                     headers=headers_2,
